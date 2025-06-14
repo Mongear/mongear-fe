@@ -1,4 +1,5 @@
-import { Eye, Heart } from "lucide-react";
+"use client"
+import { Eye, Heart, Trash } from "lucide-react";
 import Image from "next/image"
 import AddToCartLabel from "../atoms/add-to-cart-lable";
 import StarRating from "../atoms/starRating";
@@ -17,6 +18,7 @@ interface Props {
   newRelease?: boolean;
   discount?: number;
   addToCart?: boolean;
+  hasDeleteButton?: boolean;
   colors?: string[];
 }
 const ItemCard = (
@@ -32,17 +34,17 @@ const ItemCard = (
     discount,
     addToCart = false,
     colors,
+    hasDeleteButton = false,
   }
     : Props
 ) => {
-
   const { push } = useRouter();
-  const navigateItem = useCallback(() => {
+  const handleItemClick = useCallback(() => {
     push(`/products/${id}`);
   }, [id, push]);
 
   return (
-    <div onClick={navigateItem} className="w-[270] h-[350] flex flex-col justify-start items-start hover:cursor-pointer group">
+    <div className="w-[270] h-[350] flex flex-col justify-start items-start hover:cursor-pointer group">
       <div className="relative w-[270] aspect-square mb-4 overflow-hidden rounded-md hover:rounded-md">
         <Image
           src={imageUrl}
@@ -51,12 +53,25 @@ const ItemCard = (
           priority={true}
           className="object-cover group-hover:scale-110 transition-all ease-in-out h-full duration-300 "
         />
-        <div className="bg-white rounded-full absolute right-2 top-2 size-6 invisible group-hover:visible text-center flex items-center hover:scale-110 transition-all duration-150">
-          <Heart className="mx-auto h-2/3" />
-        </div>
-        <div className="bg-white rounded-full absolute right-2 top-12 size-6 invisible group-hover:visible text-center flex items-center hover:scale-110 transition-all duration-150">
-          <Eye className="mx-auto h-2/3" />
-        </div>
+        {
+          !hasDeleteButton && (
+            <>
+              <div className="bg-white rounded-full absolute right-2 top-2 size-6 invisible group-hover:visible text-center flex items-center hover:scale-110 transition-all duration-150">
+                <Heart className="mx-auto h-2/3" />
+              </div>
+              <div className="bg-white rounded-full absolute right-2 top-12 size-6 invisible group-hover:visible text-center flex items-center hover:scale-110 transition-all duration-150">
+                <Eye className="mx-auto h-2/3" />
+              </div>
+            </>
+          )
+        }
+        {
+          hasDeleteButton && (
+            <div className="bg-white rounded-full absolute right-2 top-2 size-6 invisible group-hover:visible text-center flex items-center hover:scale-110 transition-all duration-150">
+              <Trash className="mx-auto h-2/3" />
+            </div>
+          )
+        }
         {
           addToCart && (
             <AddToCartLabel className="absolute w-full bottom-0 invisible group-hover:visible rounded-b-md hover:scale-105 transition-all duration-150" />
@@ -73,7 +88,7 @@ const ItemCard = (
           )
         }
       </div>
-      <div>
+      <div onClick={handleItemClick}>
         <h4 className="font-semibold mb-2 text-lg truncate max-w-[270]">{title}</h4>
         <div className="grid grid-cols-5 space-x-2">
           <span className="col-span-1 mb-2 text-[#DB4444] font-semibold text-center my-auto h-full">${price}</span>

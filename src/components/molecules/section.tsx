@@ -37,7 +37,7 @@ const Section = ({
       {/* button */}
       {
         !!button && !isSlide && (
-          <Button variant={button.variant} className={`rounded-sm col-span-1 hover:cursor-pointer ${button.variant === "default" && "text-white bg-[#DB4444]"}`} onClick={button.action}> {button.title} </Button>
+          <Button variant={button.variant} className={`rounded-sm col-span-1 hover:cursor-pointer px-16 py-6 ${button.variant === "default" && "text-white bg-[#DB4444]"}`} onClick={button.action}> {button.title} </Button>
         )
       }
       {

@@ -14,6 +14,7 @@ interface Props extends ComponentProps<"div"> {
   }
   products: GetProductsData[];
   isSlide?: boolean;
+  hasDeleteButton?: boolean;
 }
 const ItemGridWithSection = ({
   className,
@@ -22,6 +23,7 @@ const ItemGridWithSection = ({
   title,
   button,
   isSlide,
+  hasDeleteButton = false,
 }: Props) => {
   return (
     <div className={cn(className, "")}>
@@ -33,6 +35,7 @@ const ItemGridWithSection = ({
       />
       <ItemGrid
         products={products}
+        hasDeleteButton={hasDeleteButton}
       />
     </div>
   )

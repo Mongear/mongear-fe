@@ -15,7 +15,7 @@ const IconWithNoti = ({
   const handleNavigate = () => {
     switch (type) {
       case "like":
-        push("/like");
+        push("/wishlist");
         break;
 
       case "cart":

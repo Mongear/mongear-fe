@@ -5,10 +5,12 @@ import ItemCard from "../molecules/item-card";
 
 interface Props extends ComponentProps<"div"> {
   products: GetProductsData[];
+  hasDeleteButton?: boolean;
 }
 const ItemGrid = ({
   className,
   products,
+  hasDeleteButton
 }: Props) => {
   return (
     <div className={cn(className, "overflow-x-scroll flex items-center gap-x-8")}>
@@ -22,6 +24,7 @@ const ItemGrid = ({
             price={item.price}
             rate={item.rating}
             rateNumber={item.ratingQuantity}
+            hasDeleteButton={hasDeleteButton}
           />
         ))
       }

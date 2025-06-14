@@ -18,7 +18,7 @@ const NavbarComponent = () => {
         </div>
         <div className="col-span-2">
           <div className="h-full flex items-center justify-start space-x-10 px-12">
-            <Link href="/">Home</Link>
+            <Link href="/home">Home</Link>
             <Link href="/contact">Contact</Link>
             <Link href="/about">About</Link>
             <Link href="/sign-up">Sign Up</Link>
